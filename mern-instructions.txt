@@ -1,0 +1,110 @@
+1. Create a vite client doing:
+
+  npm create vite@latest client
+
+1.1 run the command and select React > Javascript + SWC
+
+1.2 Once it is done, do these operations:
+ 
+  cd client
+  npm install
+
+2.1 Browse the web seraching for: tailwind css with vite
+2.2 follow the steps (6 in total):
+2.2.1 
+  npm install -D tailwindcss postcss autoprefixer
+2.2.2 
+  npx tailwindcss init -p
+2.2.3 tailwind.config has to be changed: copy and paste from the website
+2.2.4 replace all inside index.css
+
+3.1 clean the project. Remove the following files:
+- src/App.css
+- public/vite.svg
+- src/assets/react.svg
+3.2 replace the content of App.jsx and replace with rfc (be sure that the es7 react extension is available and active)
+3.3 other extensions:
+- consoleNinja
+-tailwind intellisense
+
+4. inside src create a "pages" folder for each pages
+4.1 create a simple content by typing rfc
+4.2 in order to communicate with these pages run the command:
+  npm install react-router-dom
+4.3 in the App.jsx add this line ( at the top):
+  import {BrowserRouter, Routes, Route} from 'react-router-dom';
+4.4 fix the content of the return:
+
+import {BrowserRouter, Routes, Route} from 'react-router-dom';
+import Home from './pages/Home';
+import SignIn from './pages/SignIn';
+import SignUp from './pages/SignUp';
+import About from './pages/About';
+import Profile from './pages/Profile';
+
+export default function App() {
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/sign-in" element={<SignIn />} />
+        <Route path="/sign-up" element={<SignUp />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/profile" element={<Profile />} />
+      </Routes>
+    </BrowserRouter>
+  )
+}
+
+TIPS: open the routes in the editor to have autocompletion
+
+5.1 create the components folder inside src.
+5.2 create the component and add it to the App.jsx as follow:
+      ...
+        <BrowserRouter>
+          <Header />
+          <Routes>
+            ...
+
+5.3 start implementing the component inside the return () (for example look at Header.jsx)
+5.3.1 If you need icons, run the command:
+  npm install react-icons
+Then import it as follow:
+
+import {FaSearch} from 'react-icons/fa';
+
+5.3.2 If you want to navigate without refreshing the page:
+
+import {Link} from 'react-router-dom';
+...
+<Link to ="/">
+    <h1 className='font-bold text-sm sm:text-xl flex flex-wrap'>
+        <span className='text-slate-500'>Daniele</span>
+        <span className='text-slate-800'>Buson</span>
+    </h1>
+</Link>
+
+// Backend
+6.1 create a new file in the root folder. Call it api (for the backend)
+6.2 run the command from teh root folder in the terminal (MOVE FROM CLIENT - cd ..):
+  npm init -y
+Then add after the field "main" this line:
+   "type":"module",
+6.3 in the api folder add a new file calling it "index.js"
+6.4 install express to smooth operations:
+  npm install express
+6.5 test this code:
+
+import express from 'express';
+
+const app = express();
+
+app.listen(3000, () => {
+    console.log('Server is running on port 3000')
+});
+
+6.6 install nodemon to have all the changes in the server to be available in real time:
+    npm install nodemon
+Then replace the content of the field "scripts" of package.json with the following:
+    "dev": "nodemon api/index.js",
+    "start": "node api/index.js"
