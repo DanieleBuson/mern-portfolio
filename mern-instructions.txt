@@ -108,3 +108,31 @@ app.listen(3000, () => {
 Then replace the content of the field "scripts" of package.json with the following:
     "dev": "nodemon api/index.js",
     "start": "node api/index.js"
+
+
+MongoDB
+pass: Mongoloide104!
+7.1 from the root folder import mongoose:
+  npm install mongoose
+7.2 go to mongodb online (Atlas) and download the URI to connect (create a new project, a database and collections)
+7.3 mycredentials:
+username: danielebuson
+password: as above
+Then create the project/db and so on...
+7.4 create a .env file to store mongodb password. Ensure that you installed locally dotenv:
+  npm install dotenv
+7.5 Add the following lines to activate dotenv:
+
+import dotenv from 'dotenv';
+
+dotenv.config();
+
+7.6 Add the following line to check the mongodb connection in the server side:
+
+mongoose.connect(process.env.MONGODB).then(() => {
+    console.log("Connected to MongoDB!");
+    }).catch((err) => {
+        console.log(err)
+    });
+
+    
